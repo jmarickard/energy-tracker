@@ -4,243 +4,241 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Energy Price Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #243010;
-    --card-bg: #2d3d18;
-    --card-border: #3a4e22;
-    --text: #e8edf5;
-    --text-dim: #7a8ba8;
-    --accent-green: #22c55e;
-    --accent-red: #ef4444;
-    --accent-blue: #3b82f6;
-    --accent-amber: #f59e0b;
-    --accent-purple: #a855f7;
+    --bg: #1a1a1a;
+    --sign-bg: #243010;
+    --sign-border: #3a4e22;
+    --sign-border-outer: #1a2608;
+    --cream: #f5e6c8;
+    --amber: #ffb300;
+    --red: #e53935;
+    --green: #43a047;
+    --dim: #8a7e6a;
+    --panel-bg: #111;
+    --price-bg: #0a0a0a;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: var(--cream);
+    font-family: 'Share Tech Mono', 'Courier New', monospace;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding: 2vh 2.5vw;
-    gap: 1.8vh;
+    align-items: center;
+    padding: 2vh 3vw;
+    gap: 2vh;
     overflow: hidden;
   }
 
-  .header {
+  /* === SIGN FRAME === */
+  .sign {
+    width: 100%;
+    max-width: 600px;
+    background: var(--sign-bg);
+    border: 0.6vh solid var(--sign-border);
+    border-radius: 1.5vh;
+    box-shadow:
+      0 0 0 0.4vh var(--sign-border-outer),
+      0 0.5vh 3vh rgba(0,0,0,0.6),
+      inset 0 0.2vh 1vh rgba(255,255,255,0.05);
+    padding: 2.5vh 3vw;
+    flex-shrink: 0;
+  }
+
+  /* === HEADER === */
+  .sign-header {
     text-align: center;
-    padding: 1.5vh 0 0.5vh;
-    flex-shrink: 0;
+    border-bottom: 0.3vh solid var(--sign-border);
+    padding-bottom: 1.5vh;
+    margin-bottom: 2vh;
   }
 
-  .header h1 {
-    font-size: 3.2vh;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text);
-  }
-
-  .header .location {
-    font-size: 1.8vh;
-    color: var(--text-dim);
-    margin-top: 0.4vh;
-  }
-
-  .section {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 1.2vh;
-    padding: 2vh 2.5vw;
-    flex-shrink: 0;
-  }
-
-  .section-title {
-    display: flex;
-    align-items: center;
-    gap: 1vw;
-    margin-bottom: 1.5vh;
-    font-size: 2vh;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-
-  .section-title .dot {
-    width: 1.2vh;
-    height: 1.2vh;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .section-title .update-info {
-    font-size: 1.3vh;
-    color: var(--text-dim);
+  .sign-header h1 {
+    font-size: 3.5vh;
     font-weight: 400;
-    text-transform: none;
-    letter-spacing: 0;
-    margin-left: auto;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-shadow: 0 0 1vh rgba(245,230,200,0.3);
   }
 
-  /* --- Crude Oil & Electricity (hero cards) --- */
-  .hero-row {
+  .sign-header .location {
+    font-size: 1.6vh;
+    color: var(--dim);
+    margin-top: 0.5vh;
+    letter-spacing: 0.1em;
+  }
+
+  /* === PRICE ROW (gas station style) === */
+  .price-row {
     display: flex;
-    gap: 2.5vw;
+    align-items: center;
+    margin-bottom: 1.5vh;
+    gap: 2vw;
   }
 
-  .hero-card {
+  .price-label {
     flex: 1;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 1.2vh;
-    padding: 2.5vh 2.5vw;
+    font-size: 2.2vh;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--cream);
+  }
+
+  .price-display {
+    background: var(--price-bg);
+    border: 0.25vh solid #333;
+    border-radius: 0.5vh;
+    padding: 1vh 2vw;
+    min-width: 38vw;
+    text-align: right;
+    box-shadow: inset 0 0.2vh 0.8vh rgba(0,0,0,0.8);
+  }
+
+  .price-value {
+    font-size: 5.5vh;
+    color: var(--amber);
+    text-shadow: 0 0 0.8vh rgba(255,179,0,0.4);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .price-unit {
+    font-size: 1.3vh;
+    color: var(--dim);
+    text-align: right;
+    margin-top: 0.3vh;
+  }
+
+  .price-change {
+    font-size: 1.6vh;
+    text-align: right;
+    margin-top: 0.3vh;
+  }
+
+  .up { color: var(--red); }
+  .down { color: var(--green); }
+  .neutral { color: var(--dim); }
+
+  /* === DIVIDER === */
+  .divider {
+    border: none;
+    border-top: 0.2vh dashed var(--sign-border);
+    margin: 1.5vh 0;
+  }
+
+  /* === FUEL GRADE BOARD === */
+  .fuel-board {
+    width: 100%;
+    max-width: 600px;
+    background: var(--sign-bg);
+    border: 0.6vh solid var(--sign-border);
+    border-radius: 1.5vh;
+    box-shadow:
+      0 0 0 0.4vh var(--sign-border-outer),
+      0 0.5vh 3vh rgba(0,0,0,0.6),
+      inset 0 0.2vh 1vh rgba(255,255,255,0.05);
+    padding: 2.5vh 3vw;
+    flex-shrink: 0;
+  }
+
+  .board-title {
+    text-align: center;
+    font-size: 2.2vh;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: 0.5vh;
+    text-shadow: 0 0 0.8vh rgba(245,230,200,0.2);
+  }
+
+  .board-subtitle {
+    text-align: center;
+    font-size: 1.3vh;
+    color: var(--dim);
+    letter-spacing: 0.08em;
+    margin-bottom: 2vh;
+  }
+
+  .fuel-grid {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    gap: 0;
   }
 
-  .hero-card .label {
-    font-size: 1.7vh;
-    color: var(--text-dim);
+  .fuel-row {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.15vh solid #333;
+    padding: 1.2vh 0;
+  }
+
+  .fuel-row:last-child {
+    border-bottom: none;
+  }
+
+  .fuel-grade {
+    flex: 1;
+    font-size: 2.4vh;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    margin-bottom: 0.8vh;
+    color: var(--cream);
   }
 
-  .hero-card .price {
-    font-size: 6vh;
-    font-weight: 700;
-    line-height: 1;
-  }
-
-  .hero-card .unit {
-    font-size: 1.8vh;
-    color: var(--text-dim);
-    margin-top: 0.5vh;
-  }
-
-  .hero-card .change {
-    font-size: 2vh;
-    margin-top: 0.8vh;
-    font-weight: 600;
-  }
-
-  .up { color: var(--accent-red); }
-  .down { color: var(--accent-green); }
-  .neutral { color: var(--text-dim); }
-
-  /* --- Gas Prices Section --- */
-  .gas-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2vh;
-  }
-
-  .gas-row {
-    display: flex;
-    align-items: center;
-    background: rgba(255,255,255,0.02);
-    border-radius: 0.8vh;
-    padding: 1.5vh 2vw;
-    gap: 2vw;
-  }
-
-  .gas-row .station-name {
-    flex: 1;
-    font-size: 2vh;
-    font-weight: 500;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .gas-row .station-addr {
-    flex: 1.2;
-    font-size: 1.5vh;
-    color: var(--text-dim);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .gas-row .gas-price {
-    font-size: 3vh;
-    font-weight: 700;
-    min-width: 12vw;
-    text-align: right;
-  }
-
-  .gas-row .gas-age {
-    font-size: 1.3vh;
-    color: var(--text-dim);
-    min-width: 10vw;
-    text-align: right;
-  }
-
-  /* --- Midwest Avg Section --- */
-  .avg-row {
-    display: flex;
-    justify-content: space-around;
-    gap: 2vw;
-    flex-wrap: wrap;
-  }
-
-  .avg-item {
+  .fuel-price-box {
+    background: var(--price-bg);
+    border: 0.2vh solid #333;
+    border-radius: 0.4vh;
+    padding: 0.8vh 2.5vw;
     text-align: center;
-    flex: 1;
-    min-width: 18vw;
+    box-shadow: inset 0 0.1vh 0.5vh rgba(0,0,0,0.8);
   }
 
-  .avg-item .grade {
-    font-size: 1.5vh;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 0.5vh;
+  .fuel-price-val {
+    font-size: 4vh;
+    color: var(--amber);
+    text-shadow: 0 0 0.6vh rgba(255,179,0,0.3);
+    font-variant-numeric: tabular-nums;
   }
 
-  .avg-item .avg-price {
-    font-size: 3.8vh;
-    font-weight: 700;
-  }
-
-  /* --- Footer --- */
+  /* === FOOTER === */
   .footer {
     margin-top: auto;
     text-align: center;
-    padding: 1vh 0;
     flex-shrink: 0;
   }
 
   .footer .clock {
-    font-size: 3vh;
-    font-weight: 600;
+    font-size: 3.5vh;
+    color: var(--amber);
+    text-shadow: 0 0 0.8vh rgba(255,179,0,0.3);
     font-variant-numeric: tabular-nums;
   }
 
   .footer .last-update {
-    font-size: 1.4vh;
-    color: var(--text-dim);
+    font-size: 1.3vh;
+    color: var(--dim);
     margin-top: 0.3vh;
+    letter-spacing: 0.05em;
   }
 
-  /* Loading / Error states */
+  /* Loading / Error */
   .loading {
-    color: var(--text-dim);
+    color: var(--dim);
     font-size: 2vh;
     text-align: center;
     padding: 2vh 0;
   }
 
   .error-msg {
-    color: var(--accent-red);
+    color: var(--red);
     font-size: 1.5vh;
     text-align: center;
     padding: 1vh 0;
@@ -251,64 +249,61 @@
     50% { opacity: 0.4; }
   }
   .loading { animation: pulse 1.5s ease-in-out infinite; }
+
+  /* Slight glow on the whole sign */
+  .sign::before, .fuel-board::before {
+    content: '';
+    position: absolute;
+    top: -2vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1vh;
+    background: rgba(255,179,0,0.08);
+    border-radius: 50%;
+    filter: blur(1vh);
+  }
+
+  .sign, .fuel-board {
+    position: relative;
+  }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="header">
-  <h1>Energy Price Tracker</h1>
-  <div class="location">Cape Girardeau, MO</div>
-</div>
+<!-- MAIN SIGN -->
+<div class="sign">
+  <div class="sign-header">
+    <h1>Today's Energy Prices</h1>
+    <div class="location">Cape Girardeau, MO</div>
+  </div>
 
-<!-- CRUDE OIL + ELECTRICITY -->
-<div class="hero-row">
-  <div class="hero-card" id="crude-card">
-    <div class="label">Crude Oil (WTI)</div>
-    <div class="price" id="crude-price">--</div>
-    <div class="unit">per barrel</div>
-    <div class="change neutral" id="crude-change">--</div>
+  <div class="price-row">
+    <div class="price-label">Crude Oil<br><span style="font-size:1.3vh;color:var(--dim)">WTI Spot</span></div>
+    <div class="price-display">
+      <div class="price-value" id="crude-price">--</div>
+      <div class="price-unit">per barrel</div>
+      <div class="price-change neutral" id="crude-change">--</div>
+    </div>
   </div>
-  <div class="hero-card" id="elec-card">
-    <div class="label">Electricity (MO)</div>
-    <div class="price" id="elec-price">--</div>
-    <div class="unit">cents / kWh</div>
-    <div class="change neutral" id="elec-period">--</div>
-  </div>
-</div>
 
-<!-- LOCAL GAS PRICES -->
-<div class="section" id="local-gas-section">
-  <div class="section-title">
-    <span class="dot" style="background:var(--accent-green)"></span>
-    Local Gas Prices — Regular
-    <span class="update-info" id="gas-update-info"></span>
-  </div>
-  <div class="gas-grid" id="gas-grid">
-    <div class="loading">Loading local prices...</div>
+  <hr class="divider">
+
+  <div class="price-row">
+    <div class="price-label">Electric<br><span style="font-size:1.3vh;color:var(--dim)">MO Residential</span></div>
+    <div class="price-display">
+      <div class="price-value" id="elec-price">--</div>
+      <div class="price-unit">cents / kWh</div>
+      <div class="price-change neutral" id="elec-period">--</div>
+    </div>
   </div>
 </div>
 
-<!-- LOCAL DIESEL PRICES -->
-<div class="section" id="local-diesel-section">
-  <div class="section-title">
-    <span class="dot" style="background:var(--accent-amber)"></span>
-    Local Diesel Prices
-    <span class="update-info" id="diesel-update-info"></span>
-  </div>
-  <div class="gas-grid" id="diesel-grid">
-    <div class="loading">Loading diesel prices...</div>
-  </div>
-</div>
-
-<!-- MIDWEST AVERAGES -->
-<div class="section">
-  <div class="section-title">
-    <span class="dot" style="background:var(--accent-blue)"></span>
-    Midwest Avg Gas Prices
-    <span class="update-info" id="avg-update-info">Weekly via EIA</span>
-  </div>
-  <div class="avg-row" id="avg-row">
+<!-- FUEL GRADE BOARD -->
+<div class="fuel-board">
+  <div class="board-title">Midwest Fuel Prices</div>
+  <div class="board-subtitle" id="avg-update-info">Weekly via EIA</div>
+  <div class="fuel-grid" id="fuel-grid">
     <div class="loading">Loading...</div>
   </div>
 </div>
@@ -325,11 +320,9 @@
 // ============================================================
 const EIA_API_KEY = '4Chg5i2sMidH1VXagwA16Swah93vp8bFZRQJ5wbl';
 
-// How often to refresh each source
-const REFRESH_GASBUDDY_MS  = 4 * 60 * 60 * 1000; // 4 hours
-const REFRESH_CRUDE_MS     = 2 * 60 * 60 * 1000;  // 2 hours
-const REFRESH_ELEC_MS      = 12 * 60 * 60 * 1000;  // 12 hours
-const REFRESH_MIDWEST_MS   = 6 * 60 * 60 * 1000;   // 6 hours
+const REFRESH_CRUDE_MS   = 2 * 60 * 60 * 1000;
+const REFRESH_ELEC_MS    = 12 * 60 * 60 * 1000;
+const REFRESH_MIDWEST_MS = 6 * 60 * 60 * 1000;
 
 // ============================================================
 //  CLOCK
@@ -374,13 +367,13 @@ async function fetchCrude() {
       const arrow = diff > 0 ? '\u25B2' : diff < 0 ? '\u25BC' : '';
       const cls = diff > 0 ? 'up' : diff < 0 ? 'down' : 'neutral';
       document.getElementById('crude-change').textContent = `${arrow} $${Math.abs(diff).toFixed(2)} (${Math.abs(pct)}%)`;
-      document.getElementById('crude-change').className = 'change ' + cls;
+      document.getElementById('crude-change').className = 'price-change ' + cls;
     }
   } catch (e) {
     console.error('Crude fetch error:', e);
     document.getElementById('crude-price').textContent = '--';
     document.getElementById('crude-change').textContent = 'Error loading';
-    document.getElementById('crude-change').className = 'change neutral';
+    document.getElementById('crude-change').className = 'price-change neutral';
   }
 }
 
@@ -400,7 +393,7 @@ async function fetchElectricity() {
     const latest = rows[0];
     document.getElementById('elec-price').textContent = Number(latest.price).toFixed(1) + '\u00A2';
     document.getElementById('elec-period').textContent = latest.period + ' avg';
-    document.getElementById('elec-period').className = 'change neutral';
+    document.getElementById('elec-period').className = 'price-change neutral';
   } catch (e) {
     console.error('Electricity fetch error:', e);
     document.getElementById('elec-price').textContent = '--';
@@ -435,19 +428,21 @@ async function fetchMidwestAvg() {
     });
 
     const results = await Promise.all(fetches);
-    const container = document.getElementById('avg-row');
+    const container = document.getElementById('fuel-grid');
     container.innerHTML = '';
 
     let periodStr = '';
     results.forEach(r => {
       if (r.period && !periodStr) periodStr = r.period;
-      const div = document.createElement('div');
-      div.className = 'avg-item';
-      div.innerHTML = `
-        <div class="grade">${r.label}</div>
-        <div class="avg-price">${r.value !== null ? '$' + Number(r.value).toFixed(2) : '--'}</div>
+      const row = document.createElement('div');
+      row.className = 'fuel-row';
+      row.innerHTML = `
+        <div class="fuel-grade">${r.label}</div>
+        <div class="fuel-price-box">
+          <div class="fuel-price-val">${r.value !== null ? '$' + Number(r.value).toFixed(2) : '--'}</div>
+        </div>
       `;
-      container.appendChild(div);
+      container.appendChild(row);
     });
 
     if (periodStr) {
@@ -455,133 +450,24 @@ async function fetchMidwestAvg() {
     }
   } catch (e) {
     console.error('Midwest avg fetch error:', e);
-    document.getElementById('avg-row').innerHTML = '<div class="error-msg">Error loading Midwest averages</div>';
+    document.getElementById('fuel-grid').innerHTML = '<div class="error-msg">Error loading fuel prices</div>';
   }
 }
 
 // ============================================================
-//  GasBuddy: Local Gas Prices
-// ============================================================
-async function fetchLocalGas() {
-  try {
-    // Fetch regular (fuel=1)
-    const regularData = await fetchGasBuddyFuel(1);
-    renderGasGrid('gas-grid', regularData, 'gas-update-info');
-
-    // Fetch diesel (fuel=4)
-    const dieselData = await fetchGasBuddyFuel(4);
-    renderGasGrid('diesel-grid', dieselData, 'diesel-update-info');
-  } catch (e) {
-    console.error('GasBuddy fetch error:', e);
-    document.getElementById('gas-grid').innerHTML =
-      '<div class="error-msg">Unable to load local prices. Showing Midwest averages instead.</div>';
-    document.getElementById('diesel-grid').innerHTML =
-      '<div class="error-msg">Unable to load local diesel prices.</div>';
-  }
-}
-
-async function fetchGasBuddyFuel(fuelType) {
-  const query = {
-    operationName: 'LocationBySearchTerm',
-    variables: {
-      fuel: fuelType,
-      maxAge: 0,
-      limit: 5,
-      search: 'Cape Girardeau, MO'
-    },
-    query: `query LocationBySearchTerm($fuel: Int, $search: String!, $maxAge: Int, $limit: Int) {
-      locationBySearchTerm(search: $search) {
-        stations(fuel: $fuel, maxAge: $maxAge, limit: $limit) {
-          results {
-            id
-            name
-            address { line1 locality region postalCode }
-            prices { fuelProduct credit { price postedTime } }
-          }
-        }
-      }
-    }`
-  };
-
-  const res = await fetch('https://www.gasbuddy.com/graphql', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(query)
-  });
-
-  const json = await res.json();
-  const stations = json?.data?.locationBySearchTerm?.stations?.results || [];
-  return stations;
-}
-
-function renderGasGrid(gridId, stations, updateInfoId) {
-  const container = document.getElementById(gridId);
-
-  if (!stations || stations.length === 0) {
-    container.innerHTML = '<div class="error-msg">No stations found</div>';
-    return;
-  }
-
-  container.innerHTML = '';
-
-  stations.forEach(station => {
-    const price = station.prices?.[0]?.credit?.price;
-    const postedTime = station.prices?.[0]?.credit?.postedTime;
-
-    const row = document.createElement('div');
-    row.className = 'gas-row';
-
-    const age = postedTime ? timeAgo(new Date(postedTime)) : '';
-
-    row.innerHTML = `
-      <div class="station-name">${escapeHtml(station.name)}</div>
-      <div class="station-addr">${escapeHtml(station.address?.line1 || '')}</div>
-      <div class="gas-price">$${price != null ? Number(price).toFixed(2) : '--'}</div>
-      <div class="gas-age">${age}</div>
-    `;
-    container.appendChild(row);
-  });
-
-  if (updateInfoId) {
-    document.getElementById(updateInfoId).textContent = 'via GasBuddy';
-  }
-}
-
-function timeAgo(date) {
-  const now = new Date();
-  const diffMs = now - date;
-  const mins = Math.floor(diffMs / 60000);
-  if (mins < 60) return mins + 'm ago';
-  const hrs = Math.floor(mins / 60);
-  if (hrs < 24) return hrs + 'h ago';
-  const days = Math.floor(hrs / 24);
-  return days + 'd ago';
-}
-
-function escapeHtml(str) {
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
-}
-
-// ============================================================
-//  INIT & REFRESH LOOPS
+//  INIT & REFRESH
 // ============================================================
 async function init() {
-  // Fire all fetches in parallel
   await Promise.allSettled([
     fetchCrude(),
     fetchElectricity(),
-    fetchMidwestAvg(),
-    fetchLocalGas()
+    fetchMidwestAvg()
   ]);
   stampUpdate();
 }
 
 init();
 
-// Set up refresh intervals
-setInterval(async () => { await fetchLocalGas(); stampUpdate(); }, REFRESH_GASBUDDY_MS);
 setInterval(async () => { await fetchCrude(); stampUpdate(); }, REFRESH_CRUDE_MS);
 setInterval(async () => { await fetchElectricity(); stampUpdate(); }, REFRESH_ELEC_MS);
 setInterval(async () => { await fetchMidwestAvg(); stampUpdate(); }, REFRESH_MIDWEST_MS);
