@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=1080, initial-scale=1.0">
 <title>Energy Price Tracker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,109 +18,122 @@
     --red: #e53935;
     --green: #43a047;
     --dim: #8a7e6a;
-    --panel-bg: #111;
     --price-bg: #0a0a0a;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  html, body {
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+  }
+
   body {
     background: var(--bg);
     color: var(--cream);
     font-family: 'Share Tech Mono', 'Courier New', monospace;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 2vh 3vw;
-    gap: 2vh;
-    overflow: hidden;
+    align-items: stretch;
+    padding: 50px 50px;
+    gap: 40px;
   }
 
   /* === SIGN FRAME === */
   .sign {
-    width: 100%;
-    max-width: 600px;
     background: var(--sign-bg);
-    border: 0.6vh solid var(--sign-border);
-    border-radius: 1.5vh;
-    box-shadow:
-      0 0 0 0.4vh var(--sign-border-outer),
-      0 0.5vh 3vh rgba(0,0,0,0.6),
-      inset 0 0.2vh 1vh rgba(255,255,255,0.05);
-    padding: 2.5vh 3vw;
-    flex-shrink: 0;
+    border: 8px solid var(--sign-border);
+    border-radius: 24px;
+    outline: 5px solid var(--sign-border-outer);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6), inset 0 3px 15px rgba(255,255,255,0.05);
+    padding: 40px 50px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
   }
 
   /* === HEADER === */
   .sign-header {
     text-align: center;
-    border-bottom: 0.3vh solid var(--sign-border);
-    padding-bottom: 1.5vh;
-    margin-bottom: 2vh;
+    border-bottom: 4px solid var(--sign-border);
+    padding-bottom: 24px;
+    margin-bottom: 30px;
+    flex-shrink: 0;
   }
 
   .sign-header h1 {
-    font-size: 3.5vh;
+    font-size: 58px;
     font-weight: 400;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--cream);
-    text-shadow: 0 0 1vh rgba(245,230,200,0.3);
+    text-shadow: 0 0 15px rgba(245,230,200,0.3);
   }
 
   .sign-header .location {
-    font-size: 1.6vh;
+    font-size: 28px;
     color: var(--dim);
-    margin-top: 0.5vh;
+    margin-top: 10px;
     letter-spacing: 0.1em;
   }
 
-  /* === PRICE ROW (gas station style) === */
+  /* === PRICE ROW === */
   .price-row {
     display: flex;
-    align-items: center;
-    margin-bottom: 1.5vh;
-    gap: 2vw;
+    align-items: stretch;
+    gap: 30px;
+    flex: 1;
   }
 
   .price-label {
-    flex: 1;
-    font-size: 2.2vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 200px;
+    flex-shrink: 0;
+    font-size: 40px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--cream);
   }
 
+  .price-label .sub {
+    font-size: 20px;
+    color: var(--dim);
+    margin-top: 6px;
+  }
+
   .price-display {
     background: var(--price-bg);
-    border: 0.25vh solid #333;
-    border-radius: 0.5vh;
-    padding: 1vh 2vw;
-    min-width: 38vw;
-    text-align: right;
-    box-shadow: inset 0 0.2vh 0.8vh rgba(0,0,0,0.8);
+    border: 3px solid #333;
+    border-radius: 8px;
+    padding: 20px 35px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    box-shadow: inset 0 3px 12px rgba(0,0,0,0.8);
   }
 
   .price-value {
-    font-size: 5.5vh;
+    font-size: 96px;
     color: var(--amber);
-    text-shadow: 0 0 0.8vh rgba(255,179,0,0.4);
+    text-shadow: 0 0 12px rgba(255,179,0,0.4);
     line-height: 1;
     font-variant-numeric: tabular-nums;
   }
 
   .price-unit {
-    font-size: 1.3vh;
+    font-size: 22px;
     color: var(--dim);
-    text-align: right;
-    margin-top: 0.3vh;
+    margin-top: 8px;
   }
 
   .price-change {
-    font-size: 1.6vh;
-    text-align: right;
-    margin-top: 0.3vh;
+    font-size: 26px;
+    margin-top: 6px;
   }
 
   .up { color: var(--red); }
@@ -130,54 +143,58 @@
   /* === DIVIDER === */
   .divider {
     border: none;
-    border-top: 0.2vh dashed var(--sign-border);
-    margin: 1.5vh 0;
+    border-top: 3px dashed var(--sign-border);
+    margin: 0;
+    flex-shrink: 0;
   }
 
   /* === FUEL GRADE BOARD === */
   .fuel-board {
-    width: 100%;
-    max-width: 600px;
     background: var(--sign-bg);
-    border: 0.6vh solid var(--sign-border);
-    border-radius: 1.5vh;
-    box-shadow:
-      0 0 0 0.4vh var(--sign-border-outer),
-      0 0.5vh 3vh rgba(0,0,0,0.6),
-      inset 0 0.2vh 1vh rgba(255,255,255,0.05);
-    padding: 2.5vh 3vw;
+    border: 8px solid var(--sign-border);
+    border-radius: 24px;
+    outline: 5px solid var(--sign-border-outer);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6), inset 0 3px 15px rgba(255,255,255,0.05);
+    padding: 40px 50px;
+    display: flex;
+    flex-direction: column;
+    flex: 1.4;
+  }
+
+  .board-header {
+    text-align: center;
     flex-shrink: 0;
+    margin-bottom: 20px;
   }
 
   .board-title {
-    text-align: center;
-    font-size: 2.2vh;
+    font-size: 44px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--cream);
-    margin-bottom: 0.5vh;
-    text-shadow: 0 0 0.8vh rgba(245,230,200,0.2);
+    text-shadow: 0 0 12px rgba(245,230,200,0.2);
   }
 
   .board-subtitle {
-    text-align: center;
-    font-size: 1.3vh;
+    font-size: 22px;
     color: var(--dim);
     letter-spacing: 0.08em;
-    margin-bottom: 2vh;
+    margin-top: 6px;
   }
 
   .fuel-grid {
     display: flex;
     flex-direction: column;
+    flex: 1;
     gap: 0;
   }
 
   .fuel-row {
     display: flex;
     align-items: center;
-    border-bottom: 0.15vh solid #333;
-    padding: 1.2vh 0;
+    gap: 30px;
+    flex: 1;
+    border-bottom: 2px solid #333;
   }
 
   .fuel-row:last-child {
@@ -186,7 +203,7 @@
 
   .fuel-grade {
     flex: 1;
-    font-size: 2.4vh;
+    font-size: 44px;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: var(--cream);
@@ -194,54 +211,55 @@
 
   .fuel-price-box {
     background: var(--price-bg);
-    border: 0.2vh solid #333;
-    border-radius: 0.4vh;
-    padding: 0.8vh 2.5vw;
+    border: 3px solid #333;
+    border-radius: 6px;
+    padding: 14px 40px;
     text-align: center;
-    box-shadow: inset 0 0.1vh 0.5vh rgba(0,0,0,0.8);
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.8);
+    min-width: 320px;
   }
 
   .fuel-price-val {
-    font-size: 4vh;
+    font-size: 72px;
     color: var(--amber);
-    text-shadow: 0 0 0.6vh rgba(255,179,0,0.3);
+    text-shadow: 0 0 10px rgba(255,179,0,0.3);
     font-variant-numeric: tabular-nums;
   }
 
   /* === FOOTER === */
   .footer {
-    margin-top: auto;
     text-align: center;
     flex-shrink: 0;
   }
 
   .footer .clock {
-    font-size: 3.5vh;
+    font-size: 64px;
     color: var(--amber);
-    text-shadow: 0 0 0.8vh rgba(255,179,0,0.3);
+    text-shadow: 0 0 12px rgba(255,179,0,0.3);
     font-variant-numeric: tabular-nums;
   }
 
   .footer .last-update {
-    font-size: 1.3vh;
+    font-size: 22px;
     color: var(--dim);
-    margin-top: 0.3vh;
+    margin-top: 6px;
     letter-spacing: 0.05em;
   }
 
   /* Loading / Error */
   .loading {
     color: var(--dim);
-    font-size: 2vh;
+    font-size: 36px;
     text-align: center;
-    padding: 2vh 0;
+    padding: 30px 0;
+    align-self: center;
   }
 
   .error-msg {
     color: var(--red);
-    font-size: 1.5vh;
+    font-size: 26px;
     text-align: center;
-    padding: 1vh 0;
+    padding: 20px 0;
   }
 
   @keyframes pulse {
@@ -249,24 +267,6 @@
     50% { opacity: 0.4; }
   }
   .loading { animation: pulse 1.5s ease-in-out infinite; }
-
-  /* Slight glow on the whole sign */
-  .sign::before, .fuel-board::before {
-    content: '';
-    position: absolute;
-    top: -2vh;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    height: 1vh;
-    background: rgba(255,179,0,0.08);
-    border-radius: 50%;
-    filter: blur(1vh);
-  }
-
-  .sign, .fuel-board {
-    position: relative;
-  }
 </style>
 </head>
 <body>
@@ -279,7 +279,7 @@
   </div>
 
   <div class="price-row">
-    <div class="price-label">Crude Oil<br><span style="font-size:1.3vh;color:var(--dim)">WTI Spot</span></div>
+    <div class="price-label">Crude Oil<span class="sub">WTI Spot</span></div>
     <div class="price-display">
       <div class="price-value" id="crude-price">--</div>
       <div class="price-unit">per barrel</div>
@@ -290,7 +290,7 @@
   <hr class="divider">
 
   <div class="price-row">
-    <div class="price-label">Electric<br><span style="font-size:1.3vh;color:var(--dim)">MO Residential</span></div>
+    <div class="price-label">Electric<span class="sub">MO Residential</span></div>
     <div class="price-display">
       <div class="price-value" id="elec-price">--</div>
       <div class="price-unit">cents / kWh</div>
@@ -301,8 +301,10 @@
 
 <!-- FUEL GRADE BOARD -->
 <div class="fuel-board">
-  <div class="board-title">Midwest Fuel Prices</div>
-  <div class="board-subtitle" id="avg-update-info">Weekly via EIA</div>
+  <div class="board-header">
+    <div class="board-title">Midwest Fuel Prices</div>
+    <div class="board-subtitle" id="avg-update-info">Weekly via EIA</div>
+  </div>
   <div class="fuel-grid" id="fuel-grid">
     <div class="loading">Loading...</div>
   </div>
@@ -315,18 +317,12 @@
 </div>
 
 <script>
-// ============================================================
-//  CONFIGURATION
-// ============================================================
 const EIA_API_KEY = '4Chg5i2sMidH1VXagwA16Swah93vp8bFZRQJ5wbl';
 
 const REFRESH_CRUDE_MS   = 2 * 60 * 60 * 1000;
 const REFRESH_ELEC_MS    = 12 * 60 * 60 * 1000;
 const REFRESH_MIDWEST_MS = 6 * 60 * 60 * 1000;
 
-// ============================================================
-//  CLOCK
-// ============================================================
 function updateClock() {
   const now = new Date();
   document.getElementById('clock').textContent =
@@ -343,9 +339,6 @@ function stampUpdate() {
     });
 }
 
-// ============================================================
-//  EIA: Crude Oil (WTI daily)
-// ============================================================
 async function fetchCrude() {
   try {
     const url = `https://api.eia.gov/v2/petroleum/pri/spt/data/?api_key=${EIA_API_KEY}`
@@ -355,12 +348,9 @@ async function fetchCrude() {
     const json = await res.json();
     const rows = json.response.data;
     if (!rows || rows.length === 0) throw new Error('No crude data');
-
     const latest = rows[0];
-    const prev = rows.length > 1 ? rows[1] : null;
-
+    const prev = rows[1] || null;
     document.getElementById('crude-price').textContent = '$' + Number(latest.value).toFixed(2);
-
     if (prev) {
       const diff = latest.value - prev.value;
       const pct = ((diff / prev.value) * 100).toFixed(1);
@@ -370,16 +360,11 @@ async function fetchCrude() {
       document.getElementById('crude-change').className = 'price-change ' + cls;
     }
   } catch (e) {
-    console.error('Crude fetch error:', e);
     document.getElementById('crude-price').textContent = '--';
     document.getElementById('crude-change').textContent = 'Error loading';
-    document.getElementById('crude-change').className = 'price-change neutral';
   }
 }
 
-// ============================================================
-//  EIA: Missouri Electricity (monthly)
-// ============================================================
 async function fetchElectricity() {
   try {
     const url = `https://api.eia.gov/v2/electricity/retail-sales/data/?api_key=${EIA_API_KEY}`
@@ -389,30 +374,23 @@ async function fetchElectricity() {
     const json = await res.json();
     const rows = json.response.data;
     if (!rows || rows.length === 0) throw new Error('No electricity data');
-
     const latest = rows[0];
     document.getElementById('elec-price').textContent = Number(latest.price).toFixed(1) + '\u00A2';
     document.getElementById('elec-period').textContent = latest.period + ' avg';
-    document.getElementById('elec-period').className = 'price-change neutral';
   } catch (e) {
-    console.error('Electricity fetch error:', e);
     document.getElementById('elec-price').textContent = '--';
     document.getElementById('elec-period').textContent = 'Error loading';
   }
 }
 
-// ============================================================
-//  EIA: Midwest Avg Gasoline (weekly)
-// ============================================================
 async function fetchMidwestAvg() {
   try {
     const products = [
-      { code: 'EPM0', label: 'Regular' },
-      { code: 'EPMM', label: 'Midgrade' },
-      { code: 'EPMP', label: 'Premium' },
-      { code: 'EPD2DXL0', label: 'Diesel' }
+      { code: 'EPM0',     label: 'Regular'  },
+      { code: 'EPMM',     label: 'Midgrade' },
+      { code: 'EPMP',     label: 'Premium'  },
+      { code: 'EPD2DXL0', label: 'Diesel'   }
     ];
-
     const fetches = products.map(async (p) => {
       const url = `https://api.eia.gov/v2/petroleum/pri/gnd/data/?api_key=${EIA_API_KEY}`
         + `&frequency=weekly&data[0]=value&facets[duoarea][]=R20&facets[product][]=${p.code}`
@@ -426,11 +404,9 @@ async function fetchMidwestAvg() {
         period: rows && rows.length > 0 ? rows[0].period : null
       };
     });
-
     const results = await Promise.all(fetches);
     const container = document.getElementById('fuel-grid');
     container.innerHTML = '';
-
     let periodStr = '';
     results.forEach(r => {
       if (r.period && !periodStr) periodStr = r.period;
@@ -440,34 +416,21 @@ async function fetchMidwestAvg() {
         <div class="fuel-grade">${r.label}</div>
         <div class="fuel-price-box">
           <div class="fuel-price-val">${r.value !== null ? '$' + Number(r.value).toFixed(2) : '--'}</div>
-        </div>
-      `;
+        </div>`;
       container.appendChild(row);
     });
-
-    if (periodStr) {
-      document.getElementById('avg-update-info').textContent = 'Week of ' + periodStr;
-    }
+    if (periodStr) document.getElementById('avg-update-info').textContent = 'Week of ' + periodStr;
   } catch (e) {
-    console.error('Midwest avg fetch error:', e);
     document.getElementById('fuel-grid').innerHTML = '<div class="error-msg">Error loading fuel prices</div>';
   }
 }
 
-// ============================================================
-//  INIT & REFRESH
-// ============================================================
 async function init() {
-  await Promise.allSettled([
-    fetchCrude(),
-    fetchElectricity(),
-    fetchMidwestAvg()
-  ]);
+  await Promise.allSettled([fetchCrude(), fetchElectricity(), fetchMidwestAvg()]);
   stampUpdate();
 }
 
 init();
-
 setInterval(async () => { await fetchCrude(); stampUpdate(); }, REFRESH_CRUDE_MS);
 setInterval(async () => { await fetchElectricity(); stampUpdate(); }, REFRESH_ELEC_MS);
 setInterval(async () => { await fetchMidwestAvg(); stampUpdate(); }, REFRESH_MIDWEST_MS);
