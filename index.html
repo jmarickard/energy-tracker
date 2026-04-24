@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=1080, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Energy Price Tracker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,8 +24,8 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   html, body {
-    width: 1080px;
-    height: 1920px;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
   }
 
@@ -36,45 +36,46 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    padding: 50px 50px;
-    gap: 40px;
+    padding: 2.5vh 4vw;
+    gap: 2vh;
   }
 
-  /* === SIGN FRAME === */
-  .sign {
+  /* === SIGN PANELS === */
+  .sign, .fuel-board {
     background: var(--sign-bg);
-    border: 8px solid var(--sign-border);
-    border-radius: 24px;
-    outline: 5px solid var(--sign-border-outer);
-    box-shadow: 0 8px 40px rgba(0,0,0,0.6), inset 0 3px 15px rgba(255,255,255,0.05);
-    padding: 40px 50px;
+    border: 0.5vh solid var(--sign-border);
+    border-radius: 2vh;
+    outline: 0.3vh solid var(--sign-border-outer);
+    box-shadow: 0 1vh 4vh rgba(0,0,0,0.6), inset 0 0.3vh 1.5vh rgba(255,255,255,0.05);
+    padding: 2.5vh 4vw;
     display: flex;
     flex-direction: column;
     flex: 1;
+    min-height: 0;
   }
 
   /* === HEADER === */
   .sign-header {
     text-align: center;
-    border-bottom: 4px solid var(--sign-border);
-    padding-bottom: 24px;
-    margin-bottom: 30px;
+    border-bottom: 0.3vh solid var(--sign-border);
+    padding-bottom: 1.5vh;
+    margin-bottom: 2vh;
     flex-shrink: 0;
   }
 
   .sign-header h1 {
-    font-size: 58px;
+    font-size: 4.5vh;
     font-weight: 400;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--cream);
-    text-shadow: 0 0 15px rgba(245,230,200,0.3);
+    text-shadow: 0 0 1.5vh rgba(245,230,200,0.3);
   }
 
   .sign-header .location {
-    font-size: 28px;
+    font-size: 2vh;
     color: var(--dim);
-    margin-top: 10px;
+    margin-top: 0.8vh;
     letter-spacing: 0.1em;
   }
 
@@ -82,58 +83,61 @@
   .price-row {
     display: flex;
     align-items: stretch;
-    gap: 30px;
+    gap: 3vw;
     flex: 1;
+    min-height: 0;
   }
 
   .price-label {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 200px;
     flex-shrink: 0;
-    font-size: 40px;
+    width: 18vw;
+    font-size: 3vh;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--cream);
+    line-height: 1.2;
   }
 
   .price-label .sub {
-    font-size: 20px;
+    font-size: 1.6vh;
     color: var(--dim);
-    margin-top: 6px;
+    margin-top: 0.6vh;
+    letter-spacing: 0.06em;
   }
 
   .price-display {
     background: var(--price-bg);
-    border: 3px solid #333;
-    border-radius: 8px;
-    padding: 20px 35px;
+    border: 0.25vh solid #333;
+    border-radius: 1vh;
+    padding: 2vh 4vw;
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
-    box-shadow: inset 0 3px 12px rgba(0,0,0,0.8);
+    box-shadow: inset 0 0.3vh 1.2vh rgba(0,0,0,0.8);
   }
 
   .price-value {
-    font-size: 96px;
+    font-size: 8vh;
     color: var(--amber);
-    text-shadow: 0 0 12px rgba(255,179,0,0.4);
+    text-shadow: 0 0 1.2vh rgba(255,179,0,0.4);
     line-height: 1;
     font-variant-numeric: tabular-nums;
   }
 
   .price-unit {
-    font-size: 22px;
+    font-size: 1.8vh;
     color: var(--dim);
-    margin-top: 8px;
+    margin-top: 0.6vh;
   }
 
   .price-change {
-    font-size: 26px;
-    margin-top: 6px;
+    font-size: 2.2vh;
+    margin-top: 0.5vh;
   }
 
   .up { color: var(--red); }
@@ -143,67 +147,57 @@
   /* === DIVIDER === */
   .divider {
     border: none;
-    border-top: 3px dashed var(--sign-border);
-    margin: 0;
+    border-top: 0.2vh dashed var(--sign-border);
     flex-shrink: 0;
   }
 
-  /* === FUEL GRADE BOARD === */
+  /* === FUEL BOARD === */
   .fuel-board {
-    background: var(--sign-bg);
-    border: 8px solid var(--sign-border);
-    border-radius: 24px;
-    outline: 5px solid var(--sign-border-outer);
-    box-shadow: 0 8px 40px rgba(0,0,0,0.6), inset 0 3px 15px rgba(255,255,255,0.05);
-    padding: 40px 50px;
-    display: flex;
-    flex-direction: column;
-    flex: 1.4;
+    flex: 1.5;
   }
 
   .board-header {
     text-align: center;
     flex-shrink: 0;
-    margin-bottom: 20px;
+    margin-bottom: 1.5vh;
   }
 
   .board-title {
-    font-size: 44px;
+    font-size: 3.5vh;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--cream);
-    text-shadow: 0 0 12px rgba(245,230,200,0.2);
+    text-shadow: 0 0 1.2vh rgba(245,230,200,0.2);
   }
 
   .board-subtitle {
-    font-size: 22px;
+    font-size: 1.8vh;
     color: var(--dim);
     letter-spacing: 0.08em;
-    margin-top: 6px;
+    margin-top: 0.5vh;
   }
 
   .fuel-grid {
     display: flex;
     flex-direction: column;
     flex: 1;
-    gap: 0;
+    min-height: 0;
   }
 
   .fuel-row {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 3vw;
     flex: 1;
-    border-bottom: 2px solid #333;
+    border-bottom: 0.15vh solid #333;
+    padding: 0 0.5vw;
   }
 
-  .fuel-row:last-child {
-    border-bottom: none;
-  }
+  .fuel-row:last-child { border-bottom: none; }
 
   .fuel-grade {
     flex: 1;
-    font-size: 44px;
+    font-size: 3.5vh;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: var(--cream);
@@ -211,18 +205,17 @@
 
   .fuel-price-box {
     background: var(--price-bg);
-    border: 3px solid #333;
-    border-radius: 6px;
-    padding: 14px 40px;
+    border: 0.2vh solid #333;
+    border-radius: 0.8vh;
+    padding: 1.2vh 4vw;
     text-align: center;
-    box-shadow: inset 0 2px 8px rgba(0,0,0,0.8);
-    min-width: 320px;
+    box-shadow: inset 0 0.2vh 0.8vh rgba(0,0,0,0.8);
   }
 
   .fuel-price-val {
-    font-size: 72px;
+    font-size: 6vh;
     color: var(--amber);
-    text-shadow: 0 0 10px rgba(255,179,0,0.3);
+    text-shadow: 0 0 1vh rgba(255,179,0,0.3);
     font-variant-numeric: tabular-nums;
   }
 
@@ -230,36 +223,34 @@
   .footer {
     text-align: center;
     flex-shrink: 0;
+    padding: 0.5vh 0;
   }
 
   .footer .clock {
-    font-size: 64px;
+    font-size: 5vh;
     color: var(--amber);
-    text-shadow: 0 0 12px rgba(255,179,0,0.3);
+    text-shadow: 0 0 1.2vh rgba(255,179,0,0.3);
     font-variant-numeric: tabular-nums;
   }
 
   .footer .last-update {
-    font-size: 22px;
+    font-size: 1.6vh;
     color: var(--dim);
-    margin-top: 6px;
+    margin-top: 0.4vh;
     letter-spacing: 0.05em;
   }
 
-  /* Loading / Error */
   .loading {
     color: var(--dim);
-    font-size: 36px;
+    font-size: 3vh;
     text-align: center;
-    padding: 30px 0;
     align-self: center;
   }
 
   .error-msg {
     color: var(--red);
-    font-size: 26px;
+    font-size: 2vh;
     text-align: center;
-    padding: 20px 0;
   }
 
   @keyframes pulse {
